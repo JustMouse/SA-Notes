@@ -1,0 +1,13 @@
+input: .
+output: .retype
+url: docs.justm.site
+edit:
+  repo: https://github.com/JustMouse/SA-Notes
+branding:
+  title: Заметки СиСА
+  label: DOCS
+#links:
+#  - text: Getting Started
+#    link: https://retype.com/guides/getting-started/
+footer:
+  copyright: "Контакты: http://t.me/JustMouse. &copy; Copyright . All rights reserved."
