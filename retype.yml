@@ -10,10 +10,7 @@ branding:
 #  - text: Getting Started
 #    link: https://retype.com/guides/getting-started/
 footer:
-  copyright: "&copy; Copyright . All rights reserved."
-  links:
-    - text: Телеграм
-      link: t.me/JustMouse
+  copyright: "Контакты: [ТГ](https://t.me/JustMouse). &copy; Copyright . All rights reserved."
 cache:
   busting: query
 breadcrumb:
