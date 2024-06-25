@@ -57,9 +57,17 @@ server {
 
 `cp sites/default/default.settings.php sites/default/settings.php`
 
+Скопировать стандартный конфиг
+
+`cp sites/default/default.settings.php sites/default/settings.php`
+
 И обязательно дать права на запись в этом файл для пользователя веб-сервера
 
-`chmod 775 sites/default/settings.php`
+`chown _nginx:_php-fpm /opt/drupal* -R`
+
+`chmod 550 /opt/drupal* -R`
+
+`chmod 770 sites/default/settings.php -R`
 
 После перезапускам nginx и автозагрузка:
 
