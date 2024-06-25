@@ -51,6 +51,16 @@ server {
 
 `Servers > LocalDB > Databases > cms (Выше будет иконка БД и кнопкой play. ниже Object и Tools) > Выполнить запрос: "CREATE EXTENSION pg_trgm; > Ответ ниже: Query returned successfully, если нет, то перезапустите php8.2-fpm`
 
+Скопировать пример конфига
+
+`cp sites/default/default.settings.php sites/default/settings.php`
+
+И обязательно дать права на запись в этом файл для пользователя веб-сервера
+
+`chmod 775 sites/default/settings.php`
+
 После перезапускам nginx и автозагрузка:
 
 `systemctl enable --now php8.2-fpm nginx`
+
+Могут быть беды с правами, параметрами root, если ошиблись. chmod и chown, но после установки сделать более безопасным и убрать флаги
