@@ -7,7 +7,7 @@
 После качаем репу куда надо
 
 `cd /opt/`
-`git clone git@github.com:zammad/zammad-docker-compose.git`
+`git clone https://github.com/zammad/zammad-docker-compose.git`
 
 Заходим внутрь
 
