@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.772625519604">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.772625705207">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -30,12 +30,12 @@
 
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
-    <link href="../resources/css/retype.css?v=3.5.0.772625519604" rel="stylesheet">
+    <link href="../resources/css/retype.css?v=3.5.0.772625705207" rel="stylesheet">
 
-    <script data-cfasync="false" src="../resources/js/config.js?v=3.5.0.772625519604" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../resources/js/config.js?v=3.5.0.772625705207" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.5.0.772625519604" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.5.0.772625519604" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.5.0.772625705207" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.5.0.772625705207" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -193,8 +193,13 @@
 Отсюда: <a href="https://www.drupal.org/docs/getting-started/system-requirements/php-requirements">https://www.drupal.org/docs/getting-started/system-requirements/php-requirements</a></p>
 <p>Внутри БД, через pgadmin4 нужно выполнить активацию плагина:</p>
 <p><code v-pre>Servers &gt; LocalDB &gt; Databases &gt; cms (Выше будет иконка БД и кнопкой play. ниже Object и Tools) &gt; Выполнить запрос: &quot;CREATE EXTENSION pg_trgm; &gt; Ответ ниже: Query returned successfully, если нет, то перезапустите php8.2-fpm</code></p>
+<p>Скопировать пример конфига</p>
+<p><code v-pre>cp sites/default/default.settings.php sites/default/settings.php</code></p>
+<p>И обязательно дать права на запись в этом файл для пользователя веб-сервера</p>
+<p><code v-pre>chmod 775 sites/default/settings.php</code></p>
 <p>После перезапускам nginx и автозагрузка:</p>
 <p><code v-pre>systemctl enable --now php8.2-fpm nginx</code></p>
+<p>Могут быть беды с правами, параметрами root, если ошиблись. chmod и chown, но после установки сделать более безопасным и убрать флаги</p>
 
                                 
                                 <!-- Required only on API pages -->
