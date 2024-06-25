@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.772626665959">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.772626840762">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -32,12 +32,12 @@
 
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
-    <link href="../resources/css/retype.css?v=3.5.0.772626665959" rel="stylesheet">
+    <link href="../resources/css/retype.css?v=3.5.0.772626840762" rel="stylesheet">
 
-    <script data-cfasync="false" src="../resources/js/config.js?v=3.5.0.772626665959" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../resources/js/config.js?v=3.5.0.772626840762" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.5.0.772626665959" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.5.0.772626665959" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.5.0.772626840762" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.5.0.772626840762" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -189,6 +189,42 @@ certutil -R -d /opt/pki -a -g 2048 -s 'CN=web.test.local,O=TEST.LOCAL' -8 'web.t
 openssl pkcs12 -in bundle.p12 -out web.crt -clcerts -nokeys
 openssl pkcs12 -in bundle.p12 -out web.key -nocerts -nodes</code></pre>
 </doc-codeblock></div>
+<doc-anchor-target id="section">
+    <h2>
+        <doc-anchor-trigger class="header-anchor-trigger" to="#section">#</doc-anchor-trigger>
+        <span>==============</span>
+    </h2>
+</doc-anchor-target>
+<p>Вы можете создать запрос на сертификат (CSR) с указанными параметрами, используя утилиту certutil для Linux. Вот шаги для создания CSR:</p>
+<ol>
+<li>Создайте файл с именем <code v-pre>cert_template.txt</code> и добавьте в него следующее содержимое, заменив <code v-pre>&lt;IP_ADDRESS&gt;</code> и <code v-pre>&lt;DNS_NAME&gt;</code> на ваши IP-адрес и DNS-имя соответственно:</li>
+</ol>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">certificate template
+cn = &lt;Common Name&gt;
+o = &lt;Organization&gt;
+serialNumber = &lt;Serial Number&gt;
+ou = &lt;Organizational Unit&gt;
+emailAddress = &lt;Email Address&gt;
+subjectAltName = ip:&lt;IP_ADDRESS&gt;, dns:&lt;DNS_NAME&gt;
+extendedKeyUsage = serverAuth
+keyUsage = digitalSignature, keyEncipherment
+nsCertType = server</code></pre>
+</doc-codeblock></div>
+<ol start="2">
+<li>Создайте запрос на сертификат (CSR) с использованием утилиты certutil и файла шаблона, созданного на предыдущем шаге:</li>
+</ol>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">certutil -R -n &quot;My Certificate&quot; -t &quot;CTu,CTu,CTu&quot; -m 1000 -v 120 -d . -x -k rsa -g 2048 -a -z SHA256 -f cert_template.txt -o my_certificate.csr</code></pre>
+</doc-codeblock></div>
+<p>Эта команда создаст запрос на сертификат (CSR) с указанными параметрами и сохранит его в файле <code v-pre>my_certificate.csr</code>.</p>
+<ol start="3">
+<li>Проверьте созданный CSR:</li>
+</ol>
+<div class="codeblock-wrapper"><doc-codeblock>
+<pre class="language-none"><code v-pre class="language-none">certutil -L -d .</code></pre>
+</doc-codeblock></div>
+<p>После создания CSR вы можете отправить его в доверенный центр сертификации (CA) для получения сертификата, подписанного этим центром сертификации.</p>
 
                                 
                                 <!-- Required only on API pages -->
