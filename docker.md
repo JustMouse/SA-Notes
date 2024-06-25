@@ -1,6 +1,6 @@
 Короче, нужно скачать несколько пакетов
 
-`apt-get install docker-engine docker-compose python3-module-dockerpty'
+`apt-get install docker-engine docker-compose python3-module-dockerpty`
 
 Обязательно запустить 
 
