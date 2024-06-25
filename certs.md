@@ -16,6 +16,11 @@
 certutil -D -n /opt/pki
 certutil -R -d /opt/pki -a -g 2048 -s 'CN=web.test.local,O=TEST.LOCAL' -8 'web.test.local' # -8 - subjectAltName Может быть много SAN`ов
 ```
+
+Скопируйте тело CSR и подпишите его.
+
+Далее подпись вертите обратно, скопируйте его и впишите в certutil
+
 При создании сертификата учитывайте параметры SAN (subjectAltName), флаг `-8` их может быть очень много. А также AuthType
 Экспорт из NSS Базы данных в RAW формат
 
