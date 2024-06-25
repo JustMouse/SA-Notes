@@ -18,6 +18,8 @@ extension=php_openssl.so # Дописать
 
 `nano /etc/nginx/site-enabled.d/default.conf`
 
+Я брал отсюда: https://habr.com/ru/articles/320036/ . По запросу: php nginx конфиг. Далее, не забудьте, что ещё есть https.
+
 ```bash
 server {
   listen *:80;
@@ -38,5 +40,17 @@ server {
   }
 }
 ```
+
+
+Качем расширения для php
+
+`apt-get install php8.2-pdo_pgsql php8.2-xml php8.2-xml php8.2-gd php8.2-json php8.2-curl php8.2-mbstring -y`
+Отсюда: https://www.drupal.org/docs/getting-started/system-requirements/php-requirements
+
+Внутри БД, через pgadmin4 нужно выполнить активацию плагина:
+
+`Servers > LocalDB > Databases > cms (Выше будет иконка БД и кнопкой play. ниже Object и Tools) > Выполнить запрос: "CREATE EXTENSION pg_trgm; > Ответ ниже: Query returned successfully, если нет, то перезапустите php8.2-fpm`
+
+После перезапускам nginx и автозагрузка:
 
 `systemctl enable --now php8.2-fpm nginx`
