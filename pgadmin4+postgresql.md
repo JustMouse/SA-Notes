@@ -1,6 +1,6 @@
 Всё намного проще чем кажется. Поехали:
 
-`apt-get update -y; apt-get install pip -y`
+`apt-get update -y; apt-get install pip postgresql16-contrib postgresql16-server -y`
 
 На сайте pgadmin4 находим https://www.pgadmin.org/download/pgadmin-4-python/
 
