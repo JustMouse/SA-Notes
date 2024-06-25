@@ -20,6 +20,8 @@ extension=php_openssl.so # Дописать
 
 Я брал отсюда: https://habr.com/ru/articles/320036/ . По запросу: php nginx конфиг. Далее, не забудьте, что ещё есть https.
 
+Определённые условия нужно комбинировать, например при https, listen должен быть 443, а server с прослушка 80 должен перенаправлять
+
 ```bash
 server {
   listen *:80;
