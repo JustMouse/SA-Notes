@@ -12,6 +12,8 @@
 
 `apt-get install nss-utils -y`
 
+Нужно создать сервис, вместе с А записью до него. Далее сделать сертификат, а Common Name ОБЯЗАТЕЛЬНО должен вести на имя этого сервиса. Если имя узла web.test.local, то и CN такое же
+
 ```bash
 certutil -D -n /opt/pki
 certutil -R -d /opt/pki -a -g 2048 -s 'CN=web.test.local,O=TEST.LOCAL' -8 'web.test.local' # -8 - subjectAltName Может быть много SAN`ов
