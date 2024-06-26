@@ -1,5 +1,5 @@
 ---
-visibility: protected
+visibility: hidden
 ---
 
 Cool
