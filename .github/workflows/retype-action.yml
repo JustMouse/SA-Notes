@@ -22,3 +22,6 @@ jobs:
       - uses: retypeapp/action-github-pages@latest
         with:
           update-branch: true
+      
+      - name: Add gtag.js
+        run: "bash add_gtag.sh"
