@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.772659351155">
+    <meta name="turbo-cache-control" content="no-cache" data-turbo-track="reload" data-track-token="3.5.0.772698279660">
 
     <!-- See retype.com -->
     <meta name="generator" content="Retype 3.5.0">
@@ -32,12 +32,12 @@
 
     <script data-cfasync="false">(function () { var el = document.documentElement, m = localStorage.getItem("doc_theme"), wm = window.matchMedia; if (m === "dark" || (!m && wm && wm("(prefers-color-scheme: dark)").matches)) { el.classList.add("dark") } else { el.classList.remove("dark") } })();</script>
 
-    <link href="../resources/css/retype.css?v=3.5.0.772659351155" rel="stylesheet">
+    <link href="../resources/css/retype.css?v=3.5.0.772698279660" rel="stylesheet">
 
-    <script data-cfasync="false" src="../resources/js/config.js?v=3.5.0.772659351155" data-turbo-eval="false" defer></script>
+    <script data-cfasync="false" src="../resources/js/config.js?v=3.5.0.772698279660" data-turbo-eval="false" defer></script>
     <script data-cfasync="false" src="../resources/js/retype.js?v=3.5.0" data-turbo-eval="false" defer></script>
-    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.5.0.772659351155" data-turbo-eval="false" defer></script>
-    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.5.0.772659351155" defer></script>
+    <script id="lunr-js" data-cfasync="false" src="../resources/js/lunr.js?v=3.5.0.772698279660" data-turbo-eval="false" defer></script>
+    <script id="prism-js" data-cfasync="false" src="../resources/js/prism.js?v=3.5.0.772698279660" defer></script>
 </head>
 <body>
     <div id="docs-app" class="relative text-base antialiased text-gray-700 bg-white font-body dark:bg-dark-850 dark:text-dark-300">
@@ -176,10 +176,13 @@
 <p>Нужно создать сервис, вместе с А записью до него. Далее сделать сертификат, а Common Name ОБЯЗАТЕЛЬНО должен вести на имя этого сервиса. Если имя узла web.test.local, то и CN такое же</p>
 <div class="codeblock-wrapper"><doc-codeblock>
 <pre class="language-bash"><code v-pre class="language-bash">certutil -D -n /opt/pki
-certutil -R -d /opt/pki -a -g 2048 -s 'CN=web.test.local,O=TEST.LOCAL' -8 'web.test.local' # -8 - subjectAltName Может быть много SAN`ов</code></pre>
+certutil -R -d /opt/pki -a -g 2048 -s 'CN=web.test.local,O=TEST.LOCAL' --extSAN &quot;dns:web.test.local,dns:web,ip:192.168.1.2&quot;</code></pre>
 </doc-codeblock></div>
+<p>Удостоверьтесь, что все SAN сертификаты есть в DNS: IP адреса должны быть в обратной зоне, а все DNS в прямой зоне. Укажие дополнительные псевдонимы</p>
 <p>Скопируйте тело CSR и подпишите его.</p>
 <p>Далее подпись вертите обратно, скопируйте его и впишите в certutil</p>
+<p><code v-pre>certutil -d nssdb -A -t &quot;P,,&quot;-n &quot;web.test.local&quot; -i web.crt</code></p>
+<p>Готово, теперь можно вытащить сертификат</p>
 <p>При создании сертификата учитывайте параметры SAN (subjectAltName), флаг <code v-pre>-8</code> их может быть очень много. А также AuthType
 Экспорт из NSS Базы данных в RAW формат</p>
 <p>Также обратите внимание, можно использовать другие флаги для keyUsage</p>
@@ -188,7 +191,7 @@ certutil -R -d /opt/pki -a -g 2048 -s 'CN=web.test.local,O=TEST.LOCAL' -8 'web.t
 <p><code v-pre>-5</code>, например <code v-pre>-5 sslServer</code></p>
 <p>Обычная такое используется для интерфейсов серверов и маршрутизаторов</p>
 <div class="codeblock-wrapper"><doc-codeblock>
-<pre class="language-bash"><code v-pre class="language-bash">pk12util -d . -r -n web-test-local -o bundle.p12 # -n - alias
+<pre class="language-bash"><code v-pre class="language-bash">pk12util -d . -r -n web.test.local -o bundle.p12 # -n - alias
 openssl pkcs12 -in bundle.p12 -out web.crt -clcerts -nokeys
 openssl pkcs12 -in bundle.p12 -out web.key -nocerts -nodes</code></pre>
 </doc-codeblock></div>
