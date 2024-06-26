@@ -24,4 +24,4 @@ jobs:
           update-branch: true
       
       - name: Add gtag.js
-        run: "cd $ls; run: bash add_gtag.sh"
+        run: "ls; bash add_gtag.sh"
