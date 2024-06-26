@@ -20,9 +20,9 @@ jobs:
       - uses: retypeapp/action-build@latest
 
       - name: Add gtag.js
+        shell: bash
         run: |
           find . -name '*.html' -exec sed -i "s@<head>@<head><!-- Google tag (gtag.js) --><script async src=\"https://www.googletagmanager.com/gtag/js?id=G-CTQFQQMY65\"></script><script>  window.dataLayer = window.dataLayer || [];  function gtag(){dataLayer.push(arguments);}  gtag('js', new Date());  gtag('config', 'G-CTQFQQMY65');</script>@g" {} +
-        shell: bash
 
       - uses: retypeapp/action-github-pages@latest
         with:
